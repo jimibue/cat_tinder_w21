@@ -19,8 +19,23 @@ class User < ActiveRecord::Base
     Cat.where("id NOT IN (?)", ids).order("RANDOM()")
   end
 
-  def self.liked(ids)
+  # class method (use self in the defintion)
+  def self.liked_cats(ids)
     ids = ids.empty? ? [0] : ids
     Cat.where("id IN (?)", ids)
   end
+
+  # instance method
+  def get_liked_cats
+    # self is the instance calling the method
+    ids = self.liked_cats.empty? ? [0] : liked_cats
+    Cat.where("id IN (?)", ids)
+  end
+
+  # Broke  recursion going on here
+  # def liked_cats
+  #   # self is the instance calling the method
+  #   ids = self.liked_cats.empty? ? [0] : liked_cats
+  #   Cat.where("id IN (?)", ids)
+  # end
 end

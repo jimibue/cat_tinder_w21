@@ -25,14 +25,21 @@ const Layout = () => {
   return (
     <div>
       <div style={styles.navbar}>
-        <div>
-          <Link to="/">Home</Link>
-        </div>
+        {authenticated && (
+          <>
+            <div>
+              <Link to="/">Home</Link>
+            </div>
+            <div>
+              <Link to="/my_cats">My Cats</Link>
+            </div>
+            <div>
+              <Link to="/protected">Protected</Link>
+            </div>
+          </>
+        )}
         <div>
           <Link to="/public">Public</Link>
-        </div>
-        <div>
-          <Link to="/protected">Protected</Link>
         </div>
         {renderAuthLinks()}
       </div>

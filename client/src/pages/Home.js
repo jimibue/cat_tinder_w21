@@ -25,12 +25,17 @@ const Home = () => {
     }
     return null;
   };
-  const upVote = (id) => {
+  const upVote = async (id) => {
     console.log(id);
+    try {
+      await axios.put(`/api/cats/${id}`);
+      removeCatFromUI(id);
+    } catch (err) {
+      alert("err in UPvote");
+    }
   };
   // no DB interaction
-  const downVote = (id) => {
-    console.log(id);
+  const removeCatFromUI = (id) => {
     // remove Cat from list
     const filteredCats = cats.filter((cat) => cat.id !== id);
     // get a new Cat to show
@@ -46,7 +51,7 @@ const Home = () => {
         <h1>{cat.name}</h1>
         <p>breed: {cat.breed}</p>
         <button onClick={() => upVote(cat.id)}>like</button>
-        <button onClick={() => downVote(cat.id)}>pass</button>
+        <button onClick={() => removeCatFromUI(cat.id)}>pass</button>
       </div>
     );
   };

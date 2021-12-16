@@ -8,6 +8,7 @@ import RequireAuth from "./components/RequireAuth";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import MyCats from "./pages/MyCats";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route element={<RequireAuth />}>
           {/* protected routes go here */}
           <Route path="/" element={<Home />} />
+          <Route path="/my_cats" element={<MyCats />} />
           <Route path="/protected" element={<Protected />} />
         </Route>
       </Route>

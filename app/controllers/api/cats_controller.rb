@@ -3,7 +3,11 @@ class Api::CatsController < ApplicationController
   # check if the token is valid
   # if successfull we will have access to current_user
   # current_user is defined by devise_token_auth
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:yo]
+
+  def yo
+    render json: "Public"
+  end
 
   def index
     render json: User.unliked_cats(current_user.liked_cats)
@@ -15,4 +19,14 @@ class Api::CatsController < ApplicationController
     # save to db
     current_user.save
   end
+
+  # liked_cats here a class Method (called on class (User))
+  def my_cats
+    render json: User.liked_cats(current_user.liked_cats)
+  end
+
+  # liked_cats here a instance method (called on instance of User)
+  # def my_cats
+  #   render json: current_user.get_liked_cats
+  # end
 end
