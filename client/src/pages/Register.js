@@ -5,6 +5,7 @@ const Register = () => {
   const navigate = useNavigate();
   const { handleRegister } = useContext(AuthContext);
   const [email, setEmail] = useState("testx@test.com");
+  const [username, setUsername] = useState("username1");
   const [password, setPassword] = useState("123456");
   const [passwordConfrimation, setPasswordConfrimation] = useState("123456");
   const handleSubmit = (e) => {
@@ -15,7 +16,7 @@ const Register = () => {
       return;
     }
     // handleRegister in AuthProvider
-    handleRegister({ email, password }, navigate);
+    handleRegister({ email, password, username }, navigate);
   };
   return (
     <>
@@ -26,6 +27,13 @@ const Register = () => {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
+          }}
+        />
+        <p>Username</p>
+        <input
+          value={username}
+          onChange={(e) => {
+            setUsername(e.target.value);
           }}
         />
         <p>password</p>

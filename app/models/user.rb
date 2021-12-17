@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   end
 
   # class method (use self in the defintion)
+  # self here refers to the USER class
   def self.liked_cats(ids)
     ids = ids.empty? ? [0] : ids
     Cat.where("id IN (?)", ids)
@@ -33,9 +34,11 @@ class User < ActiveRecord::Base
   end
 
   # Broke  recursion going on here
+  # current_user.liked_cats
   # def liked_cats
   #   # self is the instance calling the method
-  #   ids = self.liked_cats.empty? ? [0] : liked_cats
+  #   ids = current_user.liked_cats.empty? ? [0] : liked_cats
   #   Cat.where("id IN (?)", ids)
   # end
+
 end
